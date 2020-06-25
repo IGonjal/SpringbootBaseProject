@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
 
-  <name>A Camel Spring Route</name>
+  <name>GrammaticalEvolutionIsland</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,7 +61,6 @@
       <artifactId>camel-test-spring</artifactId>
       <scope>test</scope>
     </dependency>
-
   </dependencies>
 
   <build>
