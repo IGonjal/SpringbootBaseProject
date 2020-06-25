@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="strictRules">
+    <description>
+        An strict ruleset that should cover the important rules of quality
+    </description>
+    <rule ref="rulesets/basic.xml" />
+    <rule ref="rulesets/unusedcode.xml" />
+    <rule ref="rulesets/import.xml" />
+    <rule ref="rulesets/design.xml/SimplifyBooleanReturnsRule" />
+    <rule ref="rulesets/design.xml/SwitchStmtsShouldHaveDefault" />
+    <rule ref="rulesets/strings.xml/StringToString" />
+    <rule ref="rulesets/strings.xml/StringInstantiation" />
+    <rule ref="rulesets/controversial.xml/UnnecessaryConstructorRule" />
+    <rule ref="rulesets/controversial.xml/NullAssignment" />
+    <rule ref="rulesets/controversial.xml/UnusedModifier" />
+    <rule ref="rulesets/braces.xml" />
+    <rule ref="rulesets/security.xml" />
+    <rule ref="thisisshit.xml" />
+</ruleset>

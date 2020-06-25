@@ -25,6 +25,12 @@ public class Population {
         return ELITE_CHROMOSOMES;
     }
 
+    @Value("${population.worseTrashed}")
+    private static int WORSE_TRASHED;
+    public static int WORSE_TRASHED() {
+        return WORSE_TRASHED;
+    }
+
     @Autowired
     private Chromosome [] chromosomes;
     @Autowired
@@ -65,24 +71,26 @@ public class Population {
         Arrays.sort(chromosomes);
     }
 
-    private void setTrashWorstEnabled(boolean enabled) {
+    public void setTrashWorstEnabled(boolean enabled) {
         trashWorstEnabled = enabled;
     }
 
-    private void trashWorst(int numOfTrashableChromosomes){
+    private void trashWorst() {
         if(trashWorstEnabled) {
-            for (int i = chromosomes.length - (numOfTrashableChromosomes + 1); i < chromosomes.length; i++) {
+            for (int i = chromosomes.length - (WORSE_TRASHED + 1); i < chromosomes.length; i++) {
                 chromosomes[i] = Chromosome.buildRandomChromosome();
             }
         }
     }
 
-    public void computeIteration(){
+    public void computeIteration() {
         mutation();
         crossover();
         fitness();
         sort();
-        trashWorst();
+        if(trashWorstEnabled) {
+            trashWorst();
+        }
     }
 
     public boolean perfectSolutionReached(){

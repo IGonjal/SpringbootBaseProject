@@ -23,7 +23,7 @@ public class Chromosome implements Comparable{
     }
 
 
-    private int[] getGenes() {
+    public int[] getGenes() {
         return genes;
     }
 
