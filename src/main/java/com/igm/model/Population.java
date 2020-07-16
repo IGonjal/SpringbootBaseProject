@@ -10,26 +10,22 @@ import java.util.Random;
 
 public class Population {
 
-    @Value("${population.trashWorstEnabled}:false")
+    @Value("${population.trashWorstEnabled:false}")
     private boolean trashWorstEnabled;
 
     @Value("${population.mutationPercentage}")
-    private static int MUTATION_PERCENTAGE;
-    public static int MUTATION_PERCENTAGE() {
-        return MUTATION_PERCENTAGE;
-    }
+    private int mutationPercentage;
 
-    @Value("${population.eliteChromosomes}")
-    private static int ELITE_CHROMOSOMES;
-    public static int ELITE_CHROMOSOMES() {
-        return ELITE_CHROMOSOMES;
-    }
+    @Value("${population.eliteChromosomes:4}")
+    private int eliteChromosomes;
 
-    @Value("${population.worseTrashed}")
-    private static int WORSE_TRASHED;
-    public static int WORSE_TRASHED() {
-        return WORSE_TRASHED;
-    }
+    @Value("${population.worseTrashed:0}")
+    private int worseTrashed;
+
+    @Value("${chromosome.size}")
+    private int genesLength;
+
+
 
     @Autowired
     private Chromosome [] chromosomes;
@@ -45,8 +41,8 @@ public class Population {
     }
 
     private void mutation() {
-        for(int i = ELITE_CHROMOSOMES; i < chromosomes.length; i++) {
-            if (randomGenerator.nextInt(100) < MUTATION_PERCENTAGE) {
+        for(int i = eliteChromosomes; i < chromosomes.length; i++) {
+            if (randomGenerator.nextInt(100) < mutationPercentage) {
                 chromosomes[i--].mutate();
             }
         }
@@ -54,12 +50,12 @@ public class Population {
 
     private void crossover(){
         Map<Integer, Integer> pairs = crossoverMethod.getPair(generation);
-        for(int i = 0; i < ELITE_CHROMOSOMES ; i++){
+        for(int i = 0; i < eliteChromosomes; i++){
             pairs.remove(i);
         }
-        for(int i = ELITE_CHROMOSOMES ; i < chromosomes.length ; i++) {
+        for(int i = eliteChromosomes; i < chromosomes.length ; i++) {
             if(pairs.get(i) != null ) {
-                chromosomes[i].overcrossingTwoPoints(chromosomes[pairs.get(Integer.valueOf(i))], randomGenerator.nextInt(Chromosome.GENES_LENGTH()), randomGenerator.nextInt(Chromosome.GENES_LENGTH()));
+                chromosomes[i].overcrossingTwoPoints(chromosomes[pairs.get(Integer.valueOf(i))], randomGenerator.nextInt(genesLength), randomGenerator.nextInt(genesLength));
             }
         }
     }
@@ -77,7 +73,7 @@ public class Population {
 
     private void trashWorst() {
         if(trashWorstEnabled) {
-            for (int i = chromosomes.length - (WORSE_TRASHED + 1); i < chromosomes.length; i++) {
+            for (int i = chromosomes.length - (worseTrashed + 1); i < chromosomes.length; i++) {
                 chromosomes[i] = Chromosome.buildRandomChromosome();
             }
         }
@@ -91,6 +87,7 @@ public class Population {
         if(trashWorstEnabled) {
             trashWorst();
         }
+        this.generation++;
     }
 
     public boolean perfectSolutionReached(){
@@ -106,7 +103,7 @@ public class Population {
     }
 
     public void exchangeBest(Population other) {
-        for(int i = 0; i < ELITE_CHROMOSOMES ; i++) {
+        for(int i = 0; i < eliteChromosomes; i++) {
             this.chromosomes[chromosomes.length-1-i] = other.chromosomes[i];
             other.chromosomes[chromosomes.length-1-i] = this.chromosomes[i];
         }

@@ -1,19 +1,26 @@
 <?xml version="1.0"?>
-<ruleset name="strictRules">
+<ruleset name="strictRules" xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd">
     <description>
         An strict ruleset that should cover the important rules of quality
     </description>
-    <rule ref="rulesets/basic.xml" />
-    <rule ref="rulesets/unusedcode.xml" />
-    <rule ref="rulesets/import.xml" />
-    <rule ref="rulesets/design.xml/SimplifyBooleanReturnsRule" />
-    <rule ref="rulesets/design.xml/SwitchStmtsShouldHaveDefault" />
-    <rule ref="rulesets/strings.xml/StringToString" />
-    <rule ref="rulesets/strings.xml/StringInstantiation" />
-    <rule ref="rulesets/controversial.xml/UnnecessaryConstructorRule" />
-    <rule ref="rulesets/controversial.xml/NullAssignment" />
-    <rule ref="rulesets/controversial.xml/UnusedModifier" />
-    <rule ref="rulesets/braces.xml" />
-    <rule ref="rulesets/security.xml" />
-    <rule ref="thisisshit.xml" />
+
+    <rule ref="category/java/bestpractices.xml" >
+        <exclude name="UseVarargs"/>
+        <exclude name="AvoidReassigningLoopVariables" />
+    </rule>
+    <rule ref="category/java/security.xml" />
+    <rule ref="category/java/codestyle.xml" >
+        <exclude name="AtLeastOneConstructor" />
+        <exclude name="MethodArgumentCouldBeFinal" />
+        <exclude name="LocalVariableCouldBeFinal" />
+        <exclude name="OnlyOneReturn" />
+        <exclude name="LongVariable" />
+    </rule>
+    <rule ref="category/java/design.xml" >
+        <exclude name="LawOfDemeter" />
+    </rule>
+
+
 </ruleset>

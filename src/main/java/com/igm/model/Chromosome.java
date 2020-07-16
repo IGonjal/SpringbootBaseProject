@@ -4,6 +4,7 @@ import com.igm.model.interfaces.FitnessFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Chromosome implements Comparable{
@@ -12,47 +13,28 @@ public class Chromosome implements Comparable{
     @Autowired
     private FitnessFunction fitnessFunction;
     @Value("${chromosome.size}")
-    private static int GENES_LENGTH;
-    public static int GENES_LENGTH() {
-        return GENES_LENGTH;
-    }
+    private int genesLength;
     @Value("${chromosome.maxGeneValue}")
-    private static int MAX_GENE_VALUE;
-    public static int MAX_GENE_VALUE() {
-        return MAX_GENE_VALUE;
-    }
-
+    private static int maxGeneValue;
+    private double fitness;
+    private final Random randomGenerator;
 
     public int[] getGenes() {
-        return genes;
+        return Arrays.copyOf(genes,genes.length);
     }
 
-    private double fitness;
-
-    private Random randomGenerator;
-
     public Chromosome () {
-        genes = new int[GENES_LENGTH];
+        genes = new int[genesLength];
         randomGenerator = new Random();
     }
 
     public Chromosome (int[] genes) {
-        this.genes = genes;
+        this.genes = Arrays.copyOf(genes,genes.length);
         randomGenerator = new Random();
     }
 
-    public Chromosome(Random randGenerator) {
-        genes = new int[GENES_LENGTH];
-        this.randomGenerator = randGenerator;
-    }
-
-    public Chromosome(Random randGenerator, int[] genes) {
-        this.genes = genes;
-        randomGenerator = randGenerator;
-    }
-
     public void mutate () {
-        genes[randomGenerator.nextInt(genes.length + 1)] = randomGenerator.nextInt(MAX_GENE_VALUE + 1);
+        genes[randomGenerator.nextInt(genes.length + 1)] = randomGenerator.nextInt(maxGeneValue + 1);
     }
 
     public double calculateFitness() {
@@ -72,7 +54,7 @@ public class Chromosome implements Comparable{
 
     private void initialize() {
         for(int i = 0; i < genes.length; i++){
-            this.genes[i] = randomGenerator.nextInt(MAX_GENE_VALUE + 1);
+            this.genes[i] = randomGenerator.nextInt(maxGeneValue + 1);
         }
     }
 
@@ -83,12 +65,12 @@ public class Chromosome implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        if (! (o instanceof Chromosome)) {
+    public int compareTo(Object theOtherObject) {
+        if (! (theOtherObject instanceof Chromosome)) {
             return Integer.MIN_VALUE;
         }
 
-        return Double.valueOf(this.fitness).compareTo(Double.valueOf(((Chromosome) o).fitness));
+        return Double.valueOf(this.fitness).compareTo(Double.valueOf(((Chromosome) theOtherObject).fitness));
     }
 
 
