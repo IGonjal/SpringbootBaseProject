@@ -16,7 +16,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <pmdVersion>6.25.0</pmdVersion>
         <logVersion>2.13.3</logVersion>
-        <springVersion>5.2.0.RELEASE</springVersion>
+        <springVersion>5.2.8.RELEASE</springVersion>
         <springBootversion>2.2.0.RELEASE</springBootversion>
     </properties>
 
@@ -200,6 +200,24 @@
 
                 </configuration>
                 <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>5.2.2</version>
+                <configuration>
+                    <failBuildOnCVSS>8</failBuildOnCVSS>
+                    <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
+                    <failOnError>true</failOnError>
+                </configuration>
+                <executions>
+
                     <execution>
                         <goals>
                             <goal>check</goal>
