@@ -1,4 +1,4 @@
-package com.igm.model;
+package com.igm.model.genetic;
 
 public class Generation {
 

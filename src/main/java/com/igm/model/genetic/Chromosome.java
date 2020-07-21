@@ -1,6 +1,6 @@
-package com.igm.model;
+package com.igm.model.genetic;
 
-import com.igm.model.interfaces.FitnessFunction;
+import com.igm.model.genetic.interfaces.FitnessFunction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 

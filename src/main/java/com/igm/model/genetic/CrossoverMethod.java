@@ -1,4 +1,4 @@
-package com.igm.model.interfaces;
+package com.igm.model.genetic.interfaces;
 
 import java.util.Map;
 

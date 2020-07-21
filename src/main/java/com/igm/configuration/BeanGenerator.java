@@ -1,6 +1,6 @@
 package com.igm.configuration;
 
-import com.igm.model.Chromosome;
+import com.igm.model.genetic.Chromosome;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 

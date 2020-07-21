@@ -1,6 +1,6 @@
-package com.igm.model.interfaces;
+package com.igm.model.genetic.interfaces;
 
-import com.igm.model.Chromosome;
+import com.igm.model.genetic.Chromosome;
 
 public interface FitnessFunction {
     int getfitness(Chromosome chromosome);
