@@ -80,7 +80,7 @@
         </configuration>
       </plugin>
 
-
+      <!-- PMD plugin tries to avoid bugs -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
@@ -124,11 +124,34 @@
           </dependency>
         </dependencies>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.1.1</version>
+          <configuration>
+              <configLocation>checkstyle.xml</configLocation>
+              <encoding>UTF-8</encoding>
+              <consoleOutput>true</consoleOutput>
+              <failsOnError>true</failsOnError>
+              <linkXRef>false</linkXRef>
+          </configuration>
+          <executions>
+              <execution>
+                  <id>validate</id>
+                  <phase>validate</phase>
+                  <goals>
+                      <goal>check</goal>
+                  </goals>
+              </execution>
+          </executions>
+      </plugin>
     </plugins>
   </build>
 
   <reporting>
     <plugins>
+      <!-- pmd configuration -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-pmd-plugin</artifactId>
@@ -138,6 +161,20 @@
             <ruleset>${basedir}\maven-utilities\favorite-pmd.xml</ruleset>
           </rulesets>
         </configuration>
+      </plugin>
+
+      <!-- Checkstyle plugin standardizes code style (spacing, etc)-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.1.1</version>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>checkstyle</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
     </plugins>
 

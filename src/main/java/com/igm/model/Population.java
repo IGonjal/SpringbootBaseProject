@@ -28,7 +28,7 @@ public class Population {
 
 
     @Autowired
-    private Chromosome [] chromosomes;
+    private Chromosome[] chromosomes;
     @Autowired
     private Random randomGenerator;
     @Autowired
@@ -36,32 +36,32 @@ public class Population {
 
     private int generation;
 
-    public Population(){
+    public Population() {
         this.generation = 0;
     }
 
     private void mutation() {
-        for(int i = eliteChromosomes; i < chromosomes.length; i++) {
+        for (int i = eliteChromosomes; i < chromosomes.length; i++) {
             if (randomGenerator.nextInt(100) < mutationPercentage) {
                 chromosomes[i--].mutate();
             }
         }
     }
 
-    private void crossover(){
+    private void crossover() {
         Map<Integer, Integer> pairs = crossoverMethod.getPair(generation);
-        for(int i = 0; i < eliteChromosomes; i++){
+        for (int i = 0; i < eliteChromosomes; i++) {
             pairs.remove(i);
         }
-        for(int i = eliteChromosomes; i < chromosomes.length ; i++) {
-            if(pairs.get(i) != null ) {
+        for (int i = eliteChromosomes; i < chromosomes.length; i++) {
+            if (pairs.get(i) != null) {
                 chromosomes[i].overcrossingTwoPoints(chromosomes[pairs.get(Integer.valueOf(i))], randomGenerator.nextInt(genesLength), randomGenerator.nextInt(genesLength));
             }
         }
     }
 
-    private void fitness(){
-        for(Chromosome chromosome : chromosomes) {
+    private void fitness() {
+        for (Chromosome chromosome : chromosomes) {
             chromosome.calculateFitness();
         }
         Arrays.sort(chromosomes);
@@ -72,7 +72,7 @@ public class Population {
     }
 
     private void trashWorst() {
-        if(trashWorstEnabled) {
+        if (trashWorstEnabled) {
             for (int i = chromosomes.length - (worseTrashed + 1); i < chromosomes.length; i++) {
                 chromosomes[i] = Chromosome.buildRandomChromosome();
             }
@@ -84,13 +84,13 @@ public class Population {
         crossover();
         fitness();
         sort();
-        if(trashWorstEnabled) {
+        if (trashWorstEnabled) {
             trashWorst();
         }
         this.generation++;
     }
 
-    public boolean perfectSolutionReached(){
+    public boolean perfectSolutionReached() {
         return chromosomes[0].calculateFitness() == 0d;
     }
 
@@ -103,9 +103,9 @@ public class Population {
     }
 
     public void exchangeBest(Population other) {
-        for(int i = 0; i < eliteChromosomes; i++) {
-            this.chromosomes[chromosomes.length-1-i] = other.chromosomes[i];
-            other.chromosomes[chromosomes.length-1-i] = this.chromosomes[i];
+        for (int i = 0; i < eliteChromosomes; i++) {
+            this.chromosomes[chromosomes.length - 1 - i] = other.chromosomes[i];
+            other.chromosomes[chromosomes.length - 1 - i] = this.chromosomes[i];
         }
     }
 

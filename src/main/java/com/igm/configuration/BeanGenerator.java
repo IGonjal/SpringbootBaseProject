@@ -9,9 +9,9 @@ public class BeanGenerator {
     private int populationSize;
 
     @Bean
-    public Chromosome [] chromosomesGenerator() {
-        Chromosome chromosomes[] = new Chromosome[populationSize];
-        for(int i = 0; i < chromosomes.length; i++) {
+    public Chromosome[] chromosomesGenerator() {
+        Chromosome[] chromosomes = new Chromosome[populationSize];
+        for (int i = 0; i < chromosomes.length; i++) {
             chromosomes[i] = Chromosome.buildRandomChromosome();
         }
         return chromosomes;
