@@ -69,8 +69,7 @@ public class Chromosome implements Comparable {
         if (!(theOtherObject instanceof Chromosome)) {
             return Integer.MIN_VALUE;
         }
-
-        return Double.valueOf(this.fitness).compareTo(Double.valueOf(((Chromosome) theOtherObject).fitness));
+        return Double.compare(this.fitness, ((Chromosome) theOtherObject).fitness);
     }
 
 
