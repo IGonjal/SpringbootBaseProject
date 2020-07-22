@@ -72,6 +72,4 @@ public class Chromosome implements Comparable {
         return Double.compare(this.fitness, ((Chromosome) theOtherObject).fitness);
     }
 
-
-
 }
