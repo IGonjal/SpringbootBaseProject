@@ -39,7 +39,6 @@ public abstract class GrammarBase {
         };
     }
 
-
     public GrammarBase(Chromosome chromosome, double variable) {
         this.chromosome = chromosome.getGenes();
         this.counter = 0;
@@ -74,7 +73,6 @@ public abstract class GrammarBase {
         return binaryOperators[operator].operate(op1, op2);
     }
 
-
     private double unary() {
         int operator = chromosome[location++ % unaryOperators.length];
         return unaryOperators[operator].operate(mainDecisson());
@@ -84,7 +82,6 @@ public abstract class GrammarBase {
         int operator = chromosome[location++ % terminals.length];
         return terminals[operator].getValue(variable);
     }
-
 
     private interface GrammarElement {
 
