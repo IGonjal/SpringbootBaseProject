@@ -3,81 +3,94 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>igm</groupId>
-    <artifactId>swarmGrammaticalEvolution</artifactId>
+    <artifactId>SpringBootBase</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>GrammaticalEvolutionIsland</name>
+    <name>SpringbootBaseProject</name>
 
     <properties>
+        <start-class>com.igm.SpringbootApp</start-class>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <pmdVersion>6.25.0</pmdVersion>
-        <logVersion>2.13.3</logVersion>
-        <springVersion>5.2.8.RELEASE</springVersion>
-        <springBootversion>2.2.0.RELEASE</springBootversion>
+        <springBootversion>2.3.7.RELEASE</springBootversion>
+        <gsonVersion>2.8.6</gsonVersion>
+
+        <dependencyCheckPluginVersion>6.0.3</dependencyCheckPluginVersion>
+        <mavenCheckstylePluginVersion>3.1.1</mavenCheckstylePluginVersion>
+        <mavenPMDPluginVersion>3.14.0</mavenPMDPluginVersion>
+        <mavenResourcesPluginVersion>3.2.0</mavenResourcesPluginVersion>
+        <findbugsVersion>3.0.4</findbugsVersion>
+        <spotbugsVersion>4.1.4</spotbugsVersion>
     </properties>
 
 
     <dependencies>
-        <!-- logging -->
+
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <scope>runtime</scope>
-            <version>${logVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${logVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${logVersion}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>${springVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${springVersion}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${springBootversion}</version>
+            <scope>compile</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
             <version>${springBootversion}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.apache.logging.log4j</groupId>
+                    <artifactId>log4j-jul</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gsonVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${springBootversion}</version>
+            <scope>compile</scope>
+        </dependency>
+
+
     </dependencies>
 
     <build>
         <defaultGoal>install</defaultGoal>
 
-
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.3.1.RELEASE</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                        <configuration>
-                            <classifier>exec</classifier>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <version>2.3.1.RELEASE</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>repackage</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <classifier>exec</classifier>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -90,7 +103,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>${mavenResourcesPluginVersion}</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
                 </configuration>
@@ -100,7 +113,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>${mavenPMDPluginVersion}</version>
                 <executions>
                     <execution>
                         <id>ex1</id>
@@ -145,7 +158,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${mavenCheckstylePluginVersion}</version>
                 <configuration>
                     <configLocation>maven-utilities/checkstyle.xml</configLocation>
                     <encoding>UTF-8</encoding>
@@ -168,7 +181,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.0.4</version>
+                <version>${spotbugsVersion}</version>
                 <configuration>
                     <effort>Max</effort>
                     <threshold>High</threshold>
@@ -187,7 +200,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>5.2.2</version>
+                <version>${dependencyCheckPluginVersion}</version>
                 <configuration>
                     <failBuildOnCVSS>8</failBuildOnCVSS>
                     <assemblyAnalyzerEnabled>false</assemblyAnalyzerEnabled>
@@ -213,7 +226,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>${mavenPMDPluginVersion}</version>
                 <configuration>
                     <rulesets>
                         <ruleset>${basedir}\maven-utilities\favorite-pmd.xml</ruleset>
@@ -225,7 +238,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${mavenCheckstylePluginVersion}</version>
                 <reportSets>
                     <reportSet>
                         <reports>
@@ -238,13 +251,13 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
-                <version>3.0.4</version>
+                <version>${findbugsVersion}</version>
             </plugin>
 
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>3.1.8</version>
+                <version>${spotbugsVersion}</version>
             </plugin>
         </plugins>
 

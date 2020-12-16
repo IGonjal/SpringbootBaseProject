@@ -1,19 +1,14 @@
 package com.igm.configuration;
 
-import com.igm.model.genetic.Chromosome;
-import org.springframework.beans.factory.annotation.Value;
+import com.igm.model.ExampleModel;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class BeanGenerator {
-    @Value("${population.populationSize}")
-    private int populationSize;
 
     @Bean
-    public Chromosome[] chromosomesGenerator() {
-        Chromosome[] chromosomes = new Chromosome[populationSize];
-        for (int i = 0; i < chromosomes.length; i++) {
-            chromosomes[i] = Chromosome.buildRandomChromosome();
-        }
-        return chromosomes;
+    public ExampleModel exampleModelGenerator() {
+        return new ExampleModel();
     }
 }
