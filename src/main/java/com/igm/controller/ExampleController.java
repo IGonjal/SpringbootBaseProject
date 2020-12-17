@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ExampleController {
-    Logger logger = LoggerFactory.getLogger(ExampleController.class);
+    // Default logger
+    private final Logger logger = LoggerFactory.getLogger(ExampleController.class);
 
     @Autowired
     private ExampleModel anAutowiredExample;
