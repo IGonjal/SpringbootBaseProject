@@ -14,3 +14,4 @@ public class Cache implements CacheManagerCustomizer<ConcurrentMapCacheManager> 
         cacheManager.setCacheNames(Arrays.asList("users", "transactions"));
     }
 }
+
