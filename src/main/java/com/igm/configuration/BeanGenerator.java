@@ -1,14 +1,18 @@
 package com.igm.configuration;
 
-import com.igm.model.ExampleModel;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@EnableCaching
 public class BeanGenerator {
 
     @Bean
-    public ExampleModel exampleModelGenerator() {
-        return new ExampleModel();
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("example");
     }
+
 }
