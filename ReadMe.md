@@ -25,3 +25,7 @@ After this is working, you can send a Get by using postman or any other method t
 Also, the health endpoint is up and accessible under the address
 
 ```http://localhost:8080/actuator/healt``` 
+
+As an addition, you can access swagger trough the url
+
+```http://localhost:8080/swagger-ui/#/```

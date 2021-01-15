@@ -25,6 +25,7 @@
         <findbugsVersion>3.0.4</findbugsVersion>
         <spotbugsVersion>4.1.4</spotbugsVersion>
         <mavenJarPlugin>3.2.0</mavenJarPlugin>
+        <swaggerVersion>3.0.0</swaggerVersion>
     </properties>
 
 
@@ -70,6 +71,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
             <version>${springBootversion}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>${swaggerVersion}</version>
         </dependency>
 
     </dependencies>
