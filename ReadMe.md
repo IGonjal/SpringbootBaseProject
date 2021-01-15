@@ -9,7 +9,7 @@ Ismael Gonjal
 If you need to generate this image, in linux you just must be in the root of the project, and run the following (being 
 "springboot-app" the name of the image)
 
-```mvn clean install```
+```mvn -T 2C clean install```
 ```docker build . -t springboot-app```
 
 

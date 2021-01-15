@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ExampleController {
     // Default logger
     private final Logger logger = LoggerFactory.getLogger(ExampleController.class);
-    private ConfigurationService configurationService;
+    private final ConfigurationService configurationService;
 
     @Autowired
     public ExampleController(ConfigurationService configurationService) {
