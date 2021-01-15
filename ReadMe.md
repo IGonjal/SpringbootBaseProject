@@ -9,7 +9,7 @@ Ismael Gonjal
 If you need to generate this image, in linux you just must be in the root of the project, and run the following (being 
 "springboot-app" the name of the image)
 
-```mvn clean install```
+```mvn -T 2C clean install```
 ```docker build . -t springboot-app```
 
 
@@ -25,3 +25,7 @@ After this is working, you can send a Get by using postman or any other method t
 Also, the health endpoint is up and accessible under the address
 
 ```http://localhost:8080/actuator/healt``` 
+
+As an addition, you can access swagger trough the url
+
+```http://localhost:8080/swagger-ui/#/```
